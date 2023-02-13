@@ -1,12 +1,14 @@
 import "./App.css";
+import Head from "./components/Head";
+import Body from "./components/Body";
 
 function App() {
   return (
     <div className="App">
-      <h1 className="text-xl">My project</h1>
+      <Head />
+      <Body />
     </div>
   );
 }
 
 export default App;
- 
