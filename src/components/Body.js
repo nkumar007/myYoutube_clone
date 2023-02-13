@@ -1,11 +1,15 @@
 import Sidebar from "./Sidebar";
-import Main from "./MainContainer";
+
+import { useSelector } from "react-redux";
+import { Outlet } from "react-router-dom";
 
 const Body = () => {
+  const isLight = useSelector((store) => store.theme.isLight);
+
   return (
-    <div className="flex ">
+    <div className={`${isLight ? "bg-white" : "bg-black"} flex`}>
       <Sidebar />
-      <Main />
+      <Outlet />
     </div>
   );
 };
