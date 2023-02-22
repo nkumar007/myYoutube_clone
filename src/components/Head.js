@@ -6,6 +6,7 @@ import { YOUTUBE_SEARCH_API } from "../utils/constants";
 import Search from "../assets/search.png";
 import SearchSmall from "../assets/searchSmall.png";
 import { cacheResults } from "../utils/searchSlice";
+import { searchedFor } from "../utils/resultsSlice";
 
 const Head = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -24,6 +25,10 @@ const Head = () => {
     dispatch(toggleTheme());
   };
 
+  const queryClickHandler = () => {
+    dispatch(searchedFor(searchQuery));
+  };
+
   useEffect(() => {
     const timer = setTimeout(() => {
       if (searchCache[searchQuery]) {
@@ -37,7 +42,6 @@ const Head = () => {
   }, [searchQuery]);
 
   const fetchData = async () => {
-    console.log("API Call - " + searchQuery);
     const data = await fetch(YOUTUBE_SEARCH_API + searchQuery);
     const json = await data.json();
     setSuggestions(json[1]);
@@ -80,6 +84,7 @@ const Head = () => {
           <button
             className="p-2 bg-gray-200 border border-gray-200 text-lg
          text-black rounded-r-full cursor-pointer  flex items-center w-22"
+            onClick={() => queryClickHandler()}
           >
             <img src={Search} alt="searchIcon" className="bg-cover w-[63%]" />
           </button>
@@ -91,6 +96,7 @@ const Head = () => {
                 <li
                   className="flex gap-1 hover:bg-gray-100 p-2 text-lg items-center"
                   key={suggestion}
+                  onClick={() => queryClickHandler()}
                 >
                   <img
                     src={SearchSmall}
