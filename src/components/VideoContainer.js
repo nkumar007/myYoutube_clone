@@ -8,8 +8,6 @@ import SearchedVideoCard from "./SearchedVideoCard";
 const VideoContainer = () => {
   const { searchQuery, isSearched } = useSelector((store) => store.results);
 
-  console.log(isSearched);
-
   const [isCalled, setIsCalled] = useState(false);
 
   const [videos, setVideos] = useState([]);
@@ -26,6 +24,7 @@ const VideoContainer = () => {
       const data = await fetch(SURFING_API + searchQuery);
       const json = await data.json();
       setResultVideos(json.items);
+      console.log(json.items);
       setIsCalled(true);
     };
 

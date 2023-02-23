@@ -15,10 +15,10 @@ const WatchPage = () => {
     console.log(searchParams.get("v"));
   }, [dispatch, searchParams]);
   return (
-    <div className=" flex flex-col">
-      <div className="px-5 flex items-center ">
+    <div className="w-[100vw] flex flex-col ">
+      <div className="px-5 flex gap-3  m-4">
         <iframe
-          className="m-4  rounded-md  "
+          className="  rounded-md  "
           width="1200"
           height="700"
           src={"https://www.youtube.com/embed/" + searchParams.get("v")}

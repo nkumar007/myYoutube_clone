@@ -6,6 +6,7 @@ import Head from "./components/Head";
 import Body from "./components/Body";
 import MainContainer from "./components/MainContainer";
 import WatchPage from "./components/WatchPage";
+import AutoComplete from "./components/Dummy";
 
 const appRouter = createBrowserRouter([
   {
@@ -19,6 +20,10 @@ const appRouter = createBrowserRouter([
       {
         path: "watch",
         element: <WatchPage />,
+      },
+      {
+        path: "autocomplete",
+        element: <AutoComplete />,
       },
     ],
   },

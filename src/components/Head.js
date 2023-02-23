@@ -1,4 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
+import { useRef } from "react";
 import { toggleMenu } from "../utils/appSlice";
 import { toggleTheme } from "../utils/themeSlice";
 import { useState, useEffect } from "react";
@@ -26,7 +27,12 @@ const Head = () => {
   };
 
   const queryClickHandler = () => {
+    if (searchQuery === "") return null;
     dispatch(searchedFor(searchQuery));
+  };
+
+  const handleChange = (e) => {
+    setSearchQuery(e.target.value);
   };
 
   useEffect(() => {
@@ -76,38 +82,38 @@ const Head = () => {
             onFocus={() => setShowSuggestions(true)}
             onBlur={() => setShowSuggestions(false)}
             value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
+            onChange={handleChange}
             className=" border border-gray-200 px-4 py-2  w-[600px]  rounded-l-full text-lg box-border "
-            type="search"
+            type="text"
             placeholder="Search"
           />
           <button
             className="p-2 bg-gray-200 border border-gray-200 text-lg
          text-black rounded-r-full cursor-pointer  flex items-center w-22"
+            title="search"
             onClick={() => queryClickHandler()}
           >
             <img src={Search} alt="searchIcon" className="bg-cover w-[63%]" />
           </button>
         </div>
+
         {showSuggestions && (
-          <div className="w-[90%] absolute top-12">
-            <ul className="bg-white  rounded-lg border border-gray-100">
-              {suggestions.map((suggestion) => (
-                <li
-                  className="flex gap-1 hover:bg-gray-100 p-2 text-lg items-center"
-                  key={suggestion}
-                  onClick={() => queryClickHandler()}
-                >
-                  <img
-                    src={SearchSmall}
-                    alt="searchIcon"
-                    className="bg-cover w-6 h-6"
-                  />
-                  {suggestion}
-                </li>
-              ))}
-            </ul>
-          </div>
+          <ul className="w-[90%] absolute top-[48px] z-[1] bg-white  rounded-lg border border-gray-100 unorder">
+            {suggestions.map((suggestion, index) => (
+              <li
+                className="flex gap-1 hover:bg-gray-100 p-2 text-lg items-center cursor-pointer"
+                key={index}
+                onClick={() => queryClickHandler()}
+              >
+                <img
+                  src={SearchSmall}
+                  alt="searchIcon"
+                  className="bg-cover w-6 h-6"
+                />
+                {suggestion}
+              </li>
+            ))}
+          </ul>
         )}
       </div>
 
